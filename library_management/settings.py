@@ -30,7 +30,7 @@ SECRET_KEY = 'js)mw)%b_6shk!yxgc+a3*6d_u3tv-so2mm3^p&w@dgp)@p0oh'
 DEBUG = False
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 # this must change
-ALLOWED_HOSTS = ['khosravi-library-management.herokuapp.com/', '127.0.0.1', ]
+ALLOWED_HOSTS = ['khosravi-library-management.herokuapp.com/',]
 
 
 # Application definition
