@@ -159,7 +159,7 @@ django_heroku.settings(locals())
 
 
 
-
+# Added manually to have a better chance to track the bugs :)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
