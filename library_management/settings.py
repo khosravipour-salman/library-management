@@ -142,6 +142,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ] 
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 # SMTP Configuration
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
