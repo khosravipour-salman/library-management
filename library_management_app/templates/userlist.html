@@ -76,10 +76,12 @@
                         <td>{{ user.date_joined }}</td>
                         <td>{{ user.last_login }}</td>
                         <td>
-
+                            
+                            {% if user not in admins %}
                             <a href="{% url 'delete_user' user.pk %}" class="btn btn-danger btn-sm" role="button">
                                 Remove
                             </a>
+                            {% endif %}
 
                             {% if user in customers %}
                             <a href="{% url 'promote_user' user.pk %}" class="btn btn-warning btn-sm" role="button">
