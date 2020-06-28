@@ -112,26 +112,11 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-    <script>
+    <script type="text/javascript">
         var words = [
-            "Oneness with All Life", "You Can Heal Your Life", "Wherever You Go, There You Are",
-            "Mindfulness in Plain English", "The seven spiritual laws of success",
-            "The Three Questions: How to Discover and Master the Power Within You",
-            "The Voice of Knowledge", "The Mastery of Love", "The Fifth Agreement",
-            "Crime and Punishment", "War and Peace", "The Little Prince",
-            "The Forty Rules of Love", "When Nietzsche Wept", "Animal Farm",
-            "1984", "Sophie's World", "As a Man Thinketh", "A New Earth: Awakening to Your Life's Purpose",
-            "The Magic of Thinking Big", "Awaken the Giant Within", "The Alchemist",
-            "The Power of Habit: Why We Do What We Do in Life and Business",
-            "Man's Search for Meaning", "Think and Grow Rich", "The Power of Now: A Guide to Spiritual Enlightenment",
-            "The 7 Habits of Highly Effective People: Powerful Lessons in Personal Change",
-            "Stephen R. Covey", "Eckhart Tolle", "Napoleon Hill", "Viktor E. Frankl",
-            "Charles Duhigg", "Paulo Coelho", "	Tony Robbins", "David J. Schwartz",
-            "James Allen", "Jostein Gaarder", "George Orwell", "Irvin D. Yalom",
-            "Elif Shafak", "Antoine de Saint-Exupéry", "Leo Tolstoy", "Dostoevsky F.",
-            "Don Miguel Ruiz", "Janet Mills", "Barbara Emrys", "Deepak Chopra",
-            "Henepola Gunaratana", "Louise Hay","Jon Kabat-Zinn",
-        ];
+        "{% for word in autocomplete_words %}",
+        "{{ word }}",
+        "{% endfor %}"];
         $("#search").autocomplete({
             source: words
         }, {
