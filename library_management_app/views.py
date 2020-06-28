@@ -82,8 +82,7 @@ def booklist_page(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-
-	mylist = []  # get all the booknames and authors for autocomplete search field
+    mylist = []  # get all the booknames and authors for autocomplete search field
     for item in items:
         if item.name not in mylist:
             mylist.append(item.name)
@@ -115,7 +114,7 @@ def booklist_page(request):
             context = {
                 'page': page,
                 'posts': posts,
-                'query':str(q),
+                'query': str(q),
                 'autocomplete_words': mylist,
             }
             return render(request, 'booklist.html', context)
