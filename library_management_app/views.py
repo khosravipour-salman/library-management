@@ -187,7 +187,7 @@ def delete_book(request, pk):
     items = BookModel.objects.all()
 
     context = {
-        'items': items,
+        'posts': items,
     }
 
     return render(request, 'booklist.html', context)
