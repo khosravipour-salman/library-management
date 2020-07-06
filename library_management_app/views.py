@@ -184,13 +184,8 @@ def delete_book(request, pk):
 
     BookModel.objects.filter(id=pk).delete()
 
-    items = BookModel.objects.all()
 
-    context = {
-        'posts': items,
-    }
-
-    return render(request, 'booklist.html', context)
+    return redirect('books')
 
 
 @login_required(login_url='login')
