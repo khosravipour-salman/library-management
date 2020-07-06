@@ -131,6 +131,9 @@
                             </div>
                             {% render_field form.author placeholder='Author' %}
                         </div>
+                        <div class="input-group mb-2">
+                            {% render_field form.description  class="form-control" placeholder='Description' rows="4" cols="30" %}
+                        </div>
                         {{ form.publish.as_hidden }}
                         {{ form.user.as_hidden }}
 

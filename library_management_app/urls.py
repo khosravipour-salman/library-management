@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, reverse
 from django.contrib.auth import views as auth_views
 from . import views
 
@@ -13,6 +13,8 @@ urlpatterns = [
     path('books/add_book', views.add_book, name='add_book'),
     path('books/edit_book/<int:pk>/', views.edit_book, name='edit_book'),
     path('books/delete_book/<int:pk>/', views.delete_book, name='delete_book'),
+    path('books/<int:pk>/', views.single_book, name='single_book'),
+    path('books/<int:pk>/share/', views.share_book, name='share_book'),
 
 
     path('users/', views.userlist_page, name='users'),

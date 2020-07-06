@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import dj_database_url
 import os
 import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,10 +28,10 @@ SECRET_KEY = 'js)mw)%b_6shk!yxgc+a3*6d_u3tv-so2mm3^p&w@dgp)@p0oh'
 #     'DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
 # SECURITY WARNING: don't run with debug turned on in production!
 # this must change
-DEBUG = False
+DEBUG = True
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 # this must change
-ALLOWED_HOSTS = ['khosravi-library-management.herokuapp.com/',]
+ALLOWED_HOSTS = ['khosravi-library-management.herokuapp.com/', '127.0.0.1', ]
 
 
 # Application definition
@@ -93,7 +94,6 @@ DATABASES = {
     }
 }
 
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
@@ -140,7 +140,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
-] 
+]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -156,7 +156,6 @@ EMAIL_HOST_PASSWORD = '#@rDpA33'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-
 
 
 # Added manually to have a better chance to track the bugs :)

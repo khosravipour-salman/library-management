@@ -1,17 +1,17 @@
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
-from django.utils import timezone
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateUserForm
+from django.core.mail import send_mail
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
+from django.db.models import Q
+from django.utils import timezone
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from .decorators import unauthenticated_user, allowed_users
 from .models import BookModel
-from.forms import BookForm
+from .forms import CreateUserForm, BookForm, EmailBookForm, CommentForm
 
 
 def index(request):
@@ -191,6 +191,75 @@ def delete_book(request, pk):
     }
 
     return render(request, 'booklist.html', context)
+
+
+@login_required(login_url='login')
+def single_book(request, pk):
+    # Retrieve post by id
+    book_object = get_object_or_404(BookModel, id=pk)
+
+    # List of active comments for this post
+    comments = book_object.comments.filter(active=True)
+
+    new_comment = None
+
+    if request.method == 'POST':
+        # A comment was posted
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create the Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.book = book_object
+            # Save the comment to database
+            new_comment.save()
+
+    else:
+        comment_form = CommentForm()
+
+    context = {
+        'book': book_object,
+        'comments': comments,
+        'comment_form': comment_form,
+        'new_comment': new_comment,
+    }
+    return render(request, 'single_book.html', context)
+
+
+@login_required(login_url='login')
+def share_book(request, pk):
+    # Retrieve post by id
+    book = get_object_or_404(BookModel, id=pk)
+    sent = False
+
+    if request.method == 'POST':
+        # Form was submitted
+        form = EmailBookForm(request.POST)
+
+        if form.is_valid():
+            # Form Fields passed validation
+            cd = form.cleaned_data
+
+            # Send email
+            book_url = request.build_absolute_uri(book.get_absolute_url())
+
+            subject = f"{cd['name']} with {cd['email']} email account recommends you read " \
+                f"{book.name}"
+            message = f"Read {book.name} at {book_url}\n\n" \
+                f"{cd['name']}\'s comments: {cd['comments']}"
+            send_mail(subject, message,
+                      'django.librarymanagementsystem@gmail.com', [cd['to']])
+            sent = True
+
+    else:
+        form = EmailBookForm()
+
+    context = {
+        'book': book,
+        'form': form,
+        'sent': sent,
+    }
+    return render(request, 'share_book.html', context)
 
 
 # User should be in admin group to be able to see this page
