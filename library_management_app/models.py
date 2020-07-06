@@ -10,7 +10,7 @@ class BookModel(models.Model):
 
     author = models.CharField(max_length=200)
 
-    description = models.TextField(default='')
+    description = models.TextField(default='No explanation provided')
 
     publish = models.DateTimeField(default=timezone.now)
 
