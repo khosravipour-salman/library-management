@@ -71,7 +71,10 @@ def booklist_page(request):
 
     items = BookModel.objects.all().order_by('-publish')
 
-    paginator = Paginator(items, 7)
+    admin_group = Group.objects.get(name='admin')
+    admins = User.objects.all().filter(groups=admin_group)
+
+    paginator = Paginator(items, 11)
 
     page = request.GET.get('page')
 
@@ -100,7 +103,7 @@ def booklist_page(request):
             return redirect('books')
 
         elif query_set:
-            paginator = Paginator(query_set, 7)
+            paginator = Paginator(query_set, 11)
 
             page = request.GET.get('page')
 
@@ -116,6 +119,7 @@ def booklist_page(request):
                 'posts': posts,
                 'query': str(q),
                 'autocomplete_words': mylist,
+                'admins': admins,
             }
             return render(request, 'booklist.html', context)
 
@@ -123,6 +127,7 @@ def booklist_page(request):
         'page': page,
         'posts': posts,
         'autocomplete_words': mylist,
+        'admins': admins,
     }
 
     return render(request, 'booklist.html', context)
@@ -157,24 +162,30 @@ def add_book(request):
 @login_required(login_url='login')
 def edit_book(request, pk):
     item = get_object_or_404(BookModel, pk=pk)
+    book = BookModel.objects.get(id=pk)
+    flag = True
 
     if request.method == 'POST':
 
         form = BookForm(request.POST, instance=item)
-        if form.is_valid():
 
+        if form.is_valid():
             form.save()
-            return redirect('books')
+            return redirect('single_book', pk=book.id)
+        else:
+            flag = False
 
     else:
 
         form = BookForm(instance=item)
 
-        context = {
-            'form': form,
-        }
+    context = {
+        'form': form,
+        'book': book,
+        'flag': flag,
+    }
 
-        return render(request, 'edit_item.html', context)
+    return render(request, 'edit_item.html', context)
 
 
 # User should be in admin group to be able to use delete_book method
@@ -184,7 +195,6 @@ def delete_book(request, pk):
 
     BookModel.objects.filter(id=pk).delete()
 
-
     return redirect('books')
 
 
@@ -192,6 +202,8 @@ def delete_book(request, pk):
 def single_book(request, pk):
     # Retrieve post by id
     book_object = get_object_or_404(BookModel, id=pk)
+    admin_group = Group.objects.get(name='admin')
+    admins = User.objects.all().filter(groups=admin_group)
 
     # List of active comments for this post
     comments = book_object.comments.filter(active=True)
@@ -217,6 +229,7 @@ def single_book(request, pk):
         'comments': comments,
         'comment_form': comment_form,
         'new_comment': new_comment,
+        'admins': admins,
     }
     return render(request, 'single_book.html', context)
 
@@ -226,6 +239,10 @@ def share_book(request, pk):
     # Retrieve post by id
     book = get_object_or_404(BookModel, id=pk)
     sent = False
+
+    admin_group = Group.objects.get(name='admin')
+
+    admins = User.objects.all().filter(groups=admin_group)
 
     if request.method == 'POST':
         # Form was submitted
@@ -253,6 +270,7 @@ def share_book(request, pk):
         'book': book,
         'form': form,
         'sent': sent,
+        'admins': admins,
     }
     return render(request, 'share_book.html', context)
 
@@ -319,7 +337,12 @@ def promote_user(request, pk):
 @login_required(login_url='login')
 def user_page(request):
     user = request.user
+
+    admin_group = Group.objects.get(name='admin')
+    admins = User.objects.all().filter(groups=admin_group)
+
     context = {
         'user': user,
+        'admins': admins,
     }
     return render(request, 'accounts/user.html', context)

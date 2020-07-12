@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: #fefefe;
+}
+
+nav {
+    color: #f2f2f2;
+    background: #222222;
+    padding: 10px 40px 10px 70px;
+    border: 1px solid #000;
+    border-left: none;
+    border-right: none;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+nav ul li.logo {
+    flex: 1;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+nav ul div.items {
+    padding: 0 25px;
+    display: inline-flex;
+}
+
+nav ul div.items a {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 0 12px;
+    color: #f2f2f2;
+}
+
+nav ul div.items a:hover {
+    color: cyan;
+}
+
+.container {
+    margin: 0;
+    padding: 20px;
+}
+
+.heading {
+    color: #1F2833;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.heading h1,
+h5 {
+    display: inline;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-flow: wrap;
+    margin-bottom: 50px;
+}
+
+.row h5 {
+    width: 20%;
+    text-align: center;
+}
+
+.row a {
+    background: none;
+    /* color: #70a1ff; */
+    color: #0B0C10;
+    /* border: 1px solid #70a1ff; */
+    border: 1px solid #0B0C10;
+    padding: 12px 40px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: 0.4s linear;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.row .share a:hover {
+    color: #fff;
+    background: #4056A1;
+    border: 1px solid #4056A1;
+}
+
+.row .edit a:hover {
+    color: #fff;
+    background: #14A76C;
+    border: 1px solid #14A76C;
+}
+
+.row .delete a:hover {
+    color: #fff;
+    background: #F13C20;
+    border: 1px solid #F13C20;
+}
+
+
+/* .row .edit:hover {
+    color: #fff;
+    background: #0B0C10;
+}
+
+.row .delete:hover {
+    color: #fff;
+    background: #0B0C10;
+}
+
+.row .share:hover {
+    color: #fff;
+    background: #41B3A3;
+} */
+
+.row .comments {
+    text-align: center;
+    width: 100%;
+}
+
+.inner-width {
+    max-width: 900px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.name,
+.email,
+.comment {
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #0B0C10;
+    color: #888;
+    padding: 10px 6px;
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+
+.name {
+    width: 600px;
+}
+
+.email {
+    width: 600px;
+}
+
+.comment {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.row .comment-btn {
+    background: none;
+    color: #0B0C10;
+    border: 1px solid #0B0C10;
+    padding: 12px 40px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: 0.4s linear;
+    cursor: pointer;
+    width: 100%;
+}
+
+.row .comment-btn:hover {
+    background: #0B0C10;
+    color: white;
+}
+
+@media screen and (max-width: 1052px) {
+    nav {
+        padding: 10px 40px 10px 0px;
+    }
+    nav ul li.logo {
+        display: none;
+    }
+    nav ul div.items {
+        flex: 4;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .heading {
+        font-size: 20px;
+        margin-top: 30px;
+    }
+    .heading h1,
+    h5 {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .row h5 {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    nav {
+        padding-left: 10%;
+    }
+    .container {
+        width: 100%;
+    }
+    .heading {
+        padding: 20px;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .heading h1,
+    h5 {
+        display: block;
+    }
+    .name {
+        width: 400px;
+    }
+    .email {
+        width: 400px;
+    }
+    .comment {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .name {
+        width: 250px;
+    }
+    .email {
+        width: 250px;
+    }
+    .comment {
+        width: 250px;
+    }
+}

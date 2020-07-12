@@ -1,120 +1,100 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Library Management</title>
     {% load static %}
-
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/booklist.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">
-
+    <title>Library Management</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <h3 class="navbar-brand">Library Management</h3>
 
-        <div class="collapse navbar-collapse">
+    <nav>
+        <ul>
+            <li class="logo">Library Management</li>
+            <div class="items">
 
-            <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user' %}">{{ request.user }}</a>
+                <li>
+                    <a href="{% url 'user' %}">{{ request.user }}</a>
                 </li>
 
-                {% if request.user.is_staff %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users' %}">Users</a>
+                {% if request.user in admins %}
+                <li>
+                    <a href="{% url 'users' %}">Users</a>
                 </li>
                 {% endif %}
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
                 </li>
 
-            </ul>
-
-            <div class="col-sm-3 col-md-3 pull-right">
-                <form class="navbar-form" role="search" method="GET" autocomplete="off">
-                    <div class="input-group" style="width: 300px;">
-
-                        <input id="search" type="text" class="form-control" placeholder="Search" name="q">
-
-                        <input type="submit" value="search" class="btn btn-warning btn-sm">
-
-                    </div>
-                </form>
             </div>
 
-        </div>
+            <form class="navbar-form" role="search" method="GET" autocomplete="off">
+                <li class="search-icon">
+                    <input type="search" placeholder="Search" name="q" id="search">
+                    <button class="icon" type="submit">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </li>
+            </form>
+
+        </ul>
     </nav>
 
-    <div class="container col-sm-9">
-        <div>
-            <br><br><br>
 
-            <h1 class="display-4 d-inline mr-3">Books</h1>
-            <a href="{% url 'add_book' %}" class="btn btn-dark align-text-bottom btn-lg ml-3" role="button"> Add
-                Book</a>
+    <div class="container">
 
-            <br><br>
+        <div class="heading">
+            <h1>Book List</h1>
+        </div>
 
-            <table class="table table-hover table-lg  table-body">
-                <thead class="thead-light">
-                    <tr>
+        <div class="row">
 
+            <div class="card">
+                <div class="add-new-card-header">
+                    <h2>New</h2>
+                </div>
+                <div class="card-body">
+                    <p>
+                        It is time to add some usefull data to this website, but choose wisely what you add can seriously change someones life.
+                    </p>
+                    <a href="{% url 'add_book' %}" class="add-new-btn">Add New</a>
+                </div>
+            </div>
 
+            {% for post in posts %}
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ post.name }}</h3>
+                    <p>
+                        by {{ post.author}}
+                    </p>
+                </div>
+                <div class="card-body">
 
-                        <th>Name</th>
-                        <th>Author</th>
-                        <th>Created At</th>
-                        <th>Created By</th>
-                        <th></th>
+                    <p>
+                        {{ post.description|truncatewords:15 }}
+                    </p>
+                    <br/>
+                    <span class="date"> Published <b>{{ post.publish }}</b> by <b>{{ post.user }}</b></span>
 
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    {% for post in posts %}
-                    <tr>
-                        <td>
-                            <p>
-                                <a href="{{ post.get_absolute_url }}">
-                                    {{ post.name }}
-                                </a>
-                            </p>
-                        </td>
-                        <td>{{ post.author }}</td>
-                        <td>{{ post.publish }}</td>
-                        <td>{{ post.user }}</td>
-
-                        <td>
-                            <a href="{% url 'edit_book' post.pk %}" class="btn btn-warning btn-sm" role="button">
-                                Edit
-                            </a>
-                            {% if request.user.is_staff %}
-                            <a href="{% url 'delete_book' post.pk %}" class="btn btn-danger btn-sm" role="button">
-                                Delete
-                            </a>
-                            {% endif %}
-                        </td>
-
-                    </tr>
-                    {% endfor %}
-                </tbody>
-
-            </table>
-            <br>
-            <h6 class="row justify-content-center">{% include "pagination.html" with page=posts %}</h6>
+                    <a href="{{ post.get_absolute_url }}" class="btn">
+                        Read more
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
 
         </div>
+        <h4 class="pagination">{% include "pagination.html" with page=posts %}</h4>
     </div>
+
 
 
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -124,7 +104,8 @@
         var words = [
             "{% for word in autocomplete_words %}",
             "{{ word }}",
-            "{% endfor %}"];
+            "{% endfor %}"
+        ];
         $("#search").autocomplete({
             source: words
         }, {

@@ -1,106 +1,96 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Library Management</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/userlist.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Library Management</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <h3 class="navbar-brand">Library Management</h3>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02"
-            aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExample02">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user' %}">{{ request.user }} <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'books' %}">Books <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-            </ul>
+    <nav>
+        <ul>
+            <li class="logo">Library Management</li>
+            <div class="items">
 
-        </div>
+                <li>
+                    <a href="{% url 'user' %}">{{ request.user }}</a>
+                </li>
+
+
+                <li>
+                    <a href="{% url 'books' %}">Books</a>
+                </li>
+
+
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+
+            </div>
+
+        </ul>
     </nav>
 
+
     <div class="container">
-        <div>
-            <br><br><br>
+        <table class="table">
+            <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Permission</th>
+                <th>Join Date</th>
+                <th>Last Login</th>
+                <th>Delete</th>
+                <th>Promote</th>
+            </thead>
 
-            <h1 class="display-4 d-inline mr-3">Users</h1>
+            <tbody>
 
-            <br><br>
+                {% for user in users %}
 
-            <table class="table table-hover table-lg  table-body">
+                <tr>
 
-                <thead class="thead-light">
-                    <tr>
+                    <td data-label="Name">{{ user.username }}</td>
+                    <td data-label="Email">{{ user.email }}</td>
 
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Permission</th>
-                        <th>Join Date</th>
-                        <th>Last Login</th>
-                        <th></th>
+                    {% if user in admins %}
+                    <td data-label="Permission">Admin</td>
+                    {% else %}
+                    <td data-label="Permission">Editor</td>
+                    {% endif %}
 
-                    </tr>
-                </thead>
+                    <td data-label="Join Date">{{ user.date_joined }}</td>
+                    <td data-label="Last Login">{{ user.last_login }}</td>
 
-                <tbody>
+                    <td data-label="Delete">
+                        {% if user not in admins %}
+                        <a href="{% url 'delete_user' user.pk %}" role="button">
+                            <b>Remove</b>
+                        </a>
+                        {% else %} - {% endif %}
+                    </td>
 
-                    {% for user in users %}
+                    <td data-label="Promote">
+                        {% if user in customers %}
+                        <a href="{% url 'promote_user' user.pk %}" role="button">
+                            <b>Promote</b>
+                        </a>
+                        {% else %} - {% endif %}
+                    </td>
 
-                    <tr>
+                </tr>
 
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.email }}</td>
+                {% endfor %}
 
-                        {% if user.is_staff %}
-                        <td>Admin</td>
-                        {% else %}
-                        <td>Editor</td>
-                        {% endif %}
+            </tbody>
+        </table>
 
-                        <td>{{ user.date_joined }}</td>
-                        <td>{{ user.last_login }}</td>
-                        <td>
-                            
-                            {% if user not in admins %}
-                            <a href="{% url 'delete_user' user.pk %}" class="btn btn-danger btn-sm" role="button">
-                                Remove
-                            </a>
-                            {% endif %}
-
-                            {% if user in customers %}
-                            <a href="{% url 'promote_user' user.pk %}" class="btn btn-warning btn-sm" role="button">
-                                Promote
-                            </a>
-                            {% endif %}
-
-                        </td>
-                    </tr>
-
-                    {% endfor %}
-
-                </tbody>
-
-            </table>
-            <br>
-            <h6 class="row justify-content-center">{% include "pagination.html" with page=users %}</h6>
-
-        </div>
     </div>
 
 </body>

@@ -1,158 +1,160 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    {% load static %} {% load widget_tweaks %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/single_book.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <title>Library Management</title>
-    {% load static %}
-    {% load widget_tweaks %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-
-    <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <h3 class="navbar-brand">Library Management</h3>
 
-        <div class="collapse navbar-collapse">
+    <nav>
+        <ul>
+            <li class="logo">Library Management</li>
+            <div class="items">
 
-            <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user' %}">{{ request.user }}</a>
+                <li>
+                    <a href="{% url 'user' %}">{{ request.user }}</a>
                 </li>
 
-                {% if request.user.is_staff %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users' %}">Users</a>
+
+                <li>
+                    <a href="{% url 'books' %}">Books</a>
+                </li>
+
+                {% if request.user in admins %}
+                <li>
+                    <a href="{% url 'users' %}">Users</a>
                 </li>
                 {% endif %}
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'books' %}">Books <span class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-            </ul>
-            <ul>
                 <li>
-                    {% if request.user.is_staff %}
-                    <a href="{% url 'delete_book' book.pk %}" class="btn btn-danger btn-sm" role="button">
-                        Delete
-                    </a>
-                    {% endif %}
+                    <a href="{% url 'logout' %}">Logout</a>
                 </li>
-            </ul>
-        </div>
+
+            </div>
+
+        </ul>
     </nav>
+    <div class="container">
 
-    <div class="container col-sm-9">
-        <div>
-            <br><br><br>
-
-            <h1 class="display-5 d-inline mr-3">{{ book.name }}</h1>
+        <div class="heading">
+            <h1>{{ book.name }}&nbsp</h1>
             <h5 class="d-inline">by &nbsp</h5>
             <h1 class="d-inline">{{ book.author }}</h1>
-            <br><br><br>
-            <h6>
-                {{ book.description|linebreaks }}
-            </h6>
-            <br><br>
+        </div>
 
+        <div class="row">
             <p>
-                <a href="{% url 'share_book' book.pk %}">Share this post</a>
+                {{ book.description|linebreaks }}
             </p>
+        </div>
 
-            <br>
+        <div class="row">
+            <h5 class="edit">
+                <a href="{% url 'edit_book' book.pk %}">Edit</a>
+            </h5>
 
+            <h5 class="delete">
+                <a href="{% url 'delete_book' book.pk %}">Delete</a>
+            </h5>
+
+            <h5 class="share">
+                <a href="{% url 'share_book' book.pk %}">Share</a>
+            </h5>
+        </div>
+
+        <div class="row">
             {% with comments.count as total_comments %}
             <h2>
                 {{ total_comments }} comment{{ total_comments|pluralize }}
             </h2>
             {% endwith %}
+        </div>
 
+        <div class="row">
             {% for comment in comments %}
-            <div class="comment">
+            <div class="comments">
                 <h6>
                     Comment {{ forloop.counter }} by <b>{{ comment.name }}</b>
                     <small class="text-muted">{{ comment.created }}</small>
                 </h6>
-                {{ comment.body|linebreaks }}
+                <br /> {{ comment.body|linebreaks }}
                 <br />
+                <br />
+
             </div>
             {% empty %}
             <p>There are no comments yet.</p>
             {% endfor %}
+        </div>
 
+        <div class="row inner-width">
             {% if new_comment %}
             <h2>Your comment has been added.</h2>
             {% else %}
-            <h2>Add a new comment</h2>
-            <form method="POST">
-                <!-- {{ comment_form.as_p }} -->
+            <form method="POST" autocomplete="off">
+                {% csrf_token %}
 
                 <table>
                     <tr>
-                        <td>
+                        <!-- <td>
                             Name: &nbsp
-                        </td>
+                        </td> -->
                         <td>
-                            {% render_field comment_form.name %}
+                            {% render_field comment_form.name class='name' placeholder='Name' %}
                         </td>
                     </tr>
 
                     <tr>
-                        <td>
+                        <!-- <td>
                             Email: &nbsp
-                        </td>
+                        </td> -->
                         <td>
-                            {% render_field comment_form.email %}
+                            {% render_field comment_form.email class='email' placeholder='Email' %}
                         </td>
                     </tr>
 
                     <tr>
-                        <td>
+                        <!-- <td>
                             Commnet: &nbsp
-                        </td>
+                        </td> -->
                         <td>
-                            {% render_field comment_form.body placeholder='Any Comment . . . ?' %}
+                            {% render_field comment_form.body placeholder='Comment' class='comment' %}
                         </td>
                     </tr>
                 </table>
 
 
                 <br>
-                {% csrf_token %}
-                <p><input type="submit" value="Add comment" class="btn-success"></p>
+                <p><input type="submit" value="Add comment" class="comment-btn"></p>
             </form>
             {% endif %}
         </div>
+
     </div>
 
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
-    <script type="text/javascript">
-        var search_words = [
-            "{% for item in searchlist %}",
-            "{{ item }}",
-            "{% endfor%}"
-        ]
-        $("#search").autocomplete({
-            source: search_words
-        }, {
-            autoFocus: false,
-            delay: 0,
-            minLength: 1
-        });
-    </script>
 </body>
 
 </html>
+
+
+
+
+<!--
+
+<body>
+
+
+
+        </div>
+    </div>
+
+</body>
+
+</html> -->
