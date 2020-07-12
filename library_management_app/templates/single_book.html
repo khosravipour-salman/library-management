@@ -56,6 +56,7 @@
         </div>
 
         <div class="row">
+            {% if request.user in admins %}
             <h5 class="edit">
                 <a href="{% url 'edit_book' book.pk %}">Edit</a>
             </h5>
@@ -63,6 +64,7 @@
             <h5 class="delete">
                 <a href="{% url 'delete_book' book.pk %}">Delete</a>
             </h5>
+            {% endif %}
 
             <h5 class="share">
                 <a href="{% url 'share_book' book.pk %}">Share</a>

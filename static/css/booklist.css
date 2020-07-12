@@ -222,3 +222,8 @@ nav ul .search-icon .icon span {
         width: 60%;
     }
 }
+@media screen and (max-width: 570px) {
+    nav ul div.items {
+        margin-bottom: 15px;
+    }
+}

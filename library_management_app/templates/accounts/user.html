@@ -43,7 +43,11 @@
             <img src="{% static 'img/profile.png' %}" alt="Profile Image" class="profile-img">
         </div>
         <div class="card-body">
+
+            {% if user.first_name and user.last_name %}
             <p class="full-name">{{ user.first_name }} {{ user.last_name }}</p>
+            {% endif %}
+            
             <p class="username">{{ user }}</p>
             <p class="city">{{ user.date_joined }}</p>
             <p class="desc">{{ user.email }}</p>
