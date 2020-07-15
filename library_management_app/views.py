@@ -10,8 +10,8 @@ from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .decorators import unauthenticated_user, allowed_users
-from .models import BookModel
-from .forms import CreateUserForm, BookForm, EmailBookForm, CommentForm
+from .models import BookModel, AuthorModel
+from .forms import CreateUserForm, BookForm, EmailBookForm, CommentForm, AuthorForm
 
 
 def index(request):
@@ -70,6 +70,7 @@ def logout_user(request):
 def booklist_page(request):
 
     items = BookModel.objects.all().order_by('-publish')
+    authors = AuthorModel.objects.all()
 
     admin_group = Group.objects.get(name='admin')
     admins = User.objects.all().filter(groups=admin_group)
@@ -89,8 +90,9 @@ def booklist_page(request):
     for item in items:
         if item.name not in mylist:
             mylist.append(item.name)
-        if item.author not in mylist:
-            mylist.append(item.author)
+    for author in authors:
+        if author.name not in mylist:
+            mylist.append(author.name)
 
     q = request.GET.get('q')  # Search input
 
@@ -160,6 +162,22 @@ def add_book(request):
 
 
 @login_required(login_url='login')
+def add_author(request):
+    if request.method == 'POST':
+        form = AuthorForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('add_book')
+    else:
+        form = AuthorForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'add_author.html', context)
+
+@login_required(login_url='login')
 def edit_book(request, pk):
     item = get_object_or_404(BookModel, pk=pk)
     book = BookModel.objects.get(id=pk)
@@ -202,6 +220,7 @@ def delete_book(request, pk):
 def single_book(request, pk):
     # Retrieve post by id
     book_object = get_object_or_404(BookModel, id=pk)
+
     admin_group = Group.objects.get(name='admin')
     admins = User.objects.all().filter(groups=admin_group)
 
@@ -232,6 +251,35 @@ def single_book(request, pk):
         'admins': admins,
     }
     return render(request, 'single_book.html', context)
+
+
+@login_required(login_url='login')
+def author_page(request, pk):
+    admin_group = Group.objects.get(name='admin')
+    admins = User.objects.all().filter(groups=admin_group)
+
+    author_object = get_object_or_404(AuthorModel, id=pk)
+
+    other_books = author_object.books.all().distinct()
+
+    paginator = Paginator(other_books, 4)
+
+    page = request.GET.get('page')
+
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    context = {
+        'admins': admins,
+        'author': author_object,
+        'books': books,
+        'page': page,
+    }
+    return render(request, 'author.html', context)
 
 
 @login_required(login_url='login')

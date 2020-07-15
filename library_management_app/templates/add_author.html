@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %} {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/add_book.css' %}">
+    <title>Add</title>
+</head>
+
+<body>
+
+    <div class="contact-section">
+        <div class="inner-width">
+            <h1>Add Author</h1>
+            <form method="POST" autocomplete="off">
+                {% csrf_token %}
+
+                {% render_field form.name placeholder='Name' class='name' %}
+
+                <a href="{% url 'add_book' %}" class="back">Back</a>
+                <button type="submit" class="done">Done</button>
+            </form>
+
+        </div>
+        <br/>
+    </div>
+
+</body>
+
+</html>

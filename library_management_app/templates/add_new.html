@@ -15,13 +15,15 @@
         <div class="inner-width">
             <h1>Add book</h1>
             <form method="POST" autocomplete="off">
-                {% csrf_token %} {% render_field form.name placeholder='Name' class='name' %}
+                {% csrf_token %}
+
+                {% render_field form.name placeholder='Name' class='name' %}
                 <!-- {% render_field form.name placeholder='Name' class='name' %} -->
 
                 {% render_field form.author placeholder='Author Name' class='author' %}
-                <!-- {% render_field form.author placeholder='Author Name' class='author' %} -->
+                <!-- <input type="text" name="author" placeholder="Author Name" class="author"> -->
 
-                {% render_field form.description class="description" placeholder='Description' rows="1" %}
+                {% render_field form.description class="description" placeholder='Description' rows="10" %}
                 <!-- {% render_field form.description  class="description" placeholder='Description' rows="1" %} -->
 
                 {{ form.publish.as_hidden }}
@@ -30,11 +32,15 @@
                 {{ form.user.as_hidden }}
                 <!-- {{ form.user.as_hidden }} -->
 
+                
                 <a href="{% url 'books' %}" class="back">Back</a>
+                <a href="{% url 'add_author' %}" class="add-author">Add Author</a>
                 <button type="submit" class="done">Done</button>
             </form>
 
         </div>
+        <br/>
+        <!-- <h4>Seprate <b>author name field</b> with comma: <b>author1, author2, author3, ...</b></h4> -->
     </div>
 
 </body>

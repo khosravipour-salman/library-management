@@ -45,8 +45,21 @@
 
         <div class="heading">
             <h1>{{ book.name }}&nbsp</h1>
-            <h5 class="d-inline">by &nbsp</h5>
-            <h1 class="d-inline">{{ book.author }}</h1>
+            <h5>by &nbsp</h5>
+
+            {% for author in book.author.all %}
+            <h1>
+                <a href="{{ author.get_absolute_url }}" class="btn">
+                    {{ author }}
+                </a>
+
+                {% if not forloop.last %}
+                ,
+                {% endif %}
+
+            </h1>
+            {% endfor %}
+
         </div>
 
         <div class="row">

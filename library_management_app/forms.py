@@ -1,15 +1,17 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import BookModel, Comment
+from .models import BookModel, Comment, AuthorModel
 
 
 class CreateUserForm(UserCreationForm):
     first_name = forms.CharField(required=False, max_length=30)
     last_name = forms.CharField(required=False, max_length=30)
+
     class Meta:
         model = User
-        fields = [ 'first_name', 'last_name', 'username', 'email', 'password1', 'password2', ]
+        fields = ['first_name', 'last_name', 'username',
+                  'email', 'password1', 'password2', ]
 
 
 class BookForm(forms.ModelForm):
@@ -29,3 +31,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['name', 'email', 'body', ]
+
+
+class AuthorForm(forms.ModelForm):
+    class Meta:
+        model = AuthorModel
+        fields = ['name', ]

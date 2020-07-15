@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/booklist.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <title>Library Management</title>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li class="logo">Library Management</li>
+            <div class="items">
+
+                <li>
+                    <a href="{% url 'user' %}">{{ request.user }}</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'books' %}">Books</a>
+                </li>
+
+                {% if request.user in admins %}
+                <li>
+                    <a href="{% url 'users' %}">Users</a>
+                </li>
+                {% endif %}
+
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+
+            </div>
+
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <div class="heading">
+            <h1>{{ author.name }}</h1>
+        </div>
+
+        <div class="row">
+
+            {% for book in books %}
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ book.name }}</h3>
+                    {% for author in book.author.all %}
+                    <p>
+                        <b>{{ author }}</b>
+                    </p>
+                    {% endfor %}
+                </div>
+                <div class="card-body">
+
+                    <p>
+                        {{ book.description|truncatewords:15 }}
+                    </p>
+                    <br />
+                    <span class="date"> Published <b>{{ book.publish }}</b> by <b>{{ book.user }}</b></span>
+
+                    <a href="{{ book.get_absolute_url }}" class="btn">
+                        Read more
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <h4 class="pagination">{% include "pagination.html" with page=books %}</h4>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -67,6 +67,11 @@ h5 {
     display: inline;
 }
 
+.heading a{
+    color: #45A29E;
+    text-decoration: none;
+}
+
 .row {
     display: flex;
     flex-direction: row;
