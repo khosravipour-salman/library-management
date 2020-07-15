@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'library_management_app',
     'widget_tweaks',
+    'search_admin_autocomplete',
 ]
 
 MIDDLEWARE = [
