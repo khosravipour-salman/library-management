@@ -104,9 +104,11 @@
 
     <script type="text/javascript">
         var words = [
+            "{% autoescape on %}",
             "{% for word in autocomplete_words %}",
             "{{ word }}",
-            "{% endfor %}"
+            "{% endfor %}",
+            "{% endautoescape  %}"
         ];
         $("#search").autocomplete({
             source: words
