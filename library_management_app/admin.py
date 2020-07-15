@@ -1,11 +1,6 @@
 from django.contrib import admin
 from .models import BookModel, Comment, AuthorModel
 from search_admin_autocomplete.admin import SearchAutoCompleteAdmin
-# Register your models here.
-
-# @admin.register(MyModel, MyModelAdmin)
-# class MyModelAdmin(SearchAutoCompleteAdmin):
-#     search_fields = ['search_field', ]
 
 
 @admin.register(BookModel)
