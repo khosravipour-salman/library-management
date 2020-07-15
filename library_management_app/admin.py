@@ -8,7 +8,7 @@ from .models import BookModel, Comment, AuthorModel
 class BookModelAdmin(admin.ModelAdmin):
     list_display = ('name', 'publish', 'user')
     list_filter = ('publish', 'author', 'user')
-    search_fields = ('name', 'author')
+    search_fields = ('name', 'description')
     date_hierarchy = 'publish'
     ordering = ('-publish',)
     readonly_fields = ('created',)
