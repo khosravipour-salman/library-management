@@ -21,6 +21,12 @@
 
                 <a href="{% url 'add_book' %}" class="back">Back</a>
                 <button type="submit" class="done">Done</button>
+
+                {% if not flag %}
+                    <br><br>
+                    <br><br>
+                    <h4 class="author-exist">This author already exists !</h4>
+                {% endif %}
             </form>
 
         </div>

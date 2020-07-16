@@ -162,17 +162,33 @@ def add_book(request):
 
 @login_required(login_url='login')
 def add_author(request):
+    authors = AuthorModel.objects.all().distinct()
+    flag = True
     if request.method == 'POST':
         form = AuthorForm(request.POST)
 
         if form.is_valid():
+
+            cd = form.cleaned_data
+            name = cd['name']
+
+            author_list = []
+            for author in authors:
+                author_list.append(author.name)
+
+            for author in author_list:
+                if author.lower() == name.lower():
+                    flag = False
+        if flag:
             form.save()
-            return redirect('add_book')
+            return redirect('add_book')            
+            
     else:
         form = AuthorForm()
 
     context = {
         'form': form,
+        'flag': flag,
     }
     return render(request, 'add_author.html', context)
 
