@@ -11,7 +11,6 @@ class BookModelAdmin(SearchAutoCompleteAdmin):
     date_hierarchy = 'publish'
     ordering = ('-publish',)
     readonly_fields = ('created',)
-    autocomplete_fields = ('user',)
 
 
 @admin.register(Comment)
