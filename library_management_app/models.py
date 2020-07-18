@@ -23,6 +23,8 @@ class BookModel(models.Model):
 
     author = models.ManyToManyField(AuthorModel, related_name='books')
 
+    cover = models.ImageField(null=True, blank=True, default='book3.jpg')
+
     description = models.TextField(default='No explanation provided')
 
     publish = models.DateTimeField(default=timezone.now)

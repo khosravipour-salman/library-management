@@ -36,7 +36,8 @@
 
 .name,
 .author,
-.description {
+.description,
+.cover {
     background: none;
     border: none;
     outline: none;
@@ -61,6 +62,12 @@
 
 .author:before{
     content: "Select Author Name";
+}
+
+.cover{
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+
 }
 
 .description {

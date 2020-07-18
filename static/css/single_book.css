@@ -118,22 +118,6 @@ h5 {
     border: 1px solid #F13C20;
 }
 
-
-/* .row .edit:hover {
-    color: #fff;
-    background: #0B0C10;
-}
-
-.row .delete:hover {
-    color: #fff;
-    background: #0B0C10;
-}
-
-.row .share:hover {
-    color: #fff;
-    background: #41B3A3;
-} */
-
 .row .comments {
     text-align: center;
     width: 100%;
@@ -169,6 +153,10 @@ h5 {
 .comment {
     min-width: 100%;
     max-width: 100%;
+}
+
+.row .book-cover{
+    width: 50%;
 }
 
 .row .comment-btn {
@@ -246,6 +234,9 @@ h5 {
         min-width: 100%;
         max-width: 100%;
     }
+    .row .book-cover{
+        width: 70%;
+    }
 }
 
 @media screen and (max-width: 460px) {
@@ -257,5 +248,8 @@ h5 {
     }
     .comment {
         width: 250px;
+    }
+    .row .book-cover{
+        width: 80%;
     }
 }
