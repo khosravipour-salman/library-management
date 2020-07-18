@@ -28,7 +28,7 @@ SECRET_KEY = 'js)mw)%b_6shk!yxgc+a3*6d_u3tv-so2mm3^p&w@dgp)@p0oh'
 #     'DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
 # SECURITY WARNING: don't run with debug turned on in production!
 # this must change
-DEBUG = False
+DEBUG = True
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 # this must change
 ALLOWED_HOSTS = ['khosravi-library-management.herokuapp.com/', '127.0.0.1', ]
