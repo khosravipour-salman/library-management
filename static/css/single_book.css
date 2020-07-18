@@ -177,6 +177,12 @@ h5 {
     color: white;
 }
 
+.description{
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 @media screen and (max-width: 1052px) {
     nav {
         padding: 10px 40px 10px 0px;
@@ -251,5 +257,9 @@ h5 {
     }
     .row .book-cover{
         width: 80%;
+    }
+    .description{
+        margin-left: 5%;
+        margin-right: 5%;
     }
 }
