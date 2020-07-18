@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: #777;
+    /*box-sizing: border-box;*/
+}
+
+nav {
+    color: #f2f2f2;
+    background: #222222;
+    padding: 10px 40px 10px 70px;
+    border: 1px solid #000;
+    border-left: none;
+    border-right: none;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+nav ul li.logo {
+    flex: 1;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+nav ul div.items {
+    padding: 0 25px;
+    display: inline-flex;
+}
+
+nav ul div.items a {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 0 12px;
+    color: #f2f2f2;
+}
+
+nav ul div.items a:hover {
+    color: cyan;
+}
+
+.contact-form {
+    width: 85%;
+    max-width: 600px;
+    background: #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px 40px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 20px #000000b3;
+}
+
+.contact-form h1,
+h5 {
+    margin-top: 0;
+    font-weight: 200;
+    color: #0B0C10;
+}
+
+.txtb {
+    border: 1px solid gray;
+    margin: 8px 0;
+    padding: 12px 8px;
+    border-radius: 8px;
+}
+
+.txtb:hover {
+    border: 1px solid #1F2833;
+}
+
+.txtb label {
+    display: block;
+    text-align: left;
+    color: #333;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.txtb .input,
+.txtb .textarea {
+    width: 100%;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 18px;
+    margin-top: 6px;
+}
+
+.txtb .textarea {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 30px;
+    max-height: 100px;
+}
+
+.btn {
+    display: inline-block;
+    background: #1F2833;
+    padding: 14px 0;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background: white;
+    color: #1F2833;
+    border: 1px solid #1F2833;
+}
+
+@media screen and (max-width: 1052px) {
+    nav {
+        padding: 10px 40px 10px 0px;
+    }
+    nav ul li.logo {
+        display: none;
+    }
+    nav ul div.items {
+        flex: 4;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .contact-form {
+        max-width: 300px;
+        top: 60%;
+        left: 48%;
+    }
+    nav ul div.items {
+        margin-left: 50px;
+    }
+}

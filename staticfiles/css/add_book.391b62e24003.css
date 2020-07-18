@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contact-section {
+    /* background: #313840; */
+    background: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.inner-width {
+    max-width: 600px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.contact-section h1, h4{
+    font-size: 20px;
+    /* color: #888; */
+    color: #0B0C10;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 400;
+}
+
+.contact-section .author-exist{
+    border-left: 2px solid #C70039;
+    border-right: 2px solid #581845;
+}
+
+.name,
+.author,
+.description,
+.cover {
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #0B0C10;
+    /* color: #888; */
+    color: #888;
+    padding: 10px 6px;
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+
+.name {
+    /* float: left; */
+    width: 100%;
+}
+
+.author {
+    /* float: right; */
+    width: 100%;
+    height: 150px;
+}
+
+.author:before{
+    content: "Select Author Name";
+}
+
+.cover{
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+
+}
+
+.description {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.contact-section .done {
+    background: none;
+    /* color: #70a1ff; */
+    color: #581845;
+    /* border: 1px solid #70a1ff; */
+    border: 1px solid #581845;
+    padding: 12px 40px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: 0.4s linear;
+    cursor: pointer;
+}
+
+.contact-section .add-author {
+    background: none;
+    color: #900C3f;
+    border: 1px solid #900C3f;
+    padding: 12px 40px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: 0.4s linear;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.contact-section .back {
+    background: none;
+    color: #C70039;
+    border: 1px solid #C70039;
+    padding: 12px 40px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: 0.4s linear;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.contact-section .back:hover {
+    /* background: #70a1ff; */
+    background: #C70039;
+    /* color: #fff; */
+    color: #fff;
+}
+
+.contact-section .add-author:hover {
+    /* background: #70a1ff; */
+    background: #900C3f;
+    /* color: #fff; */
+    color: #fff;
+}
+
+.contact-section .done:hover {
+    background: #581845;
+    color: #fff;
+}
+
+.error {
+    color: red;
+}
+
+@media screen and (max-width: 480px) {
+    .done, .add-author, .back{
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
