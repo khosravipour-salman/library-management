@@ -14,7 +14,7 @@
     <div class="contact-section">
         <div class="inner-width">
             <h1>Edit</h1>
-            <form method="POST" autocomplete="off" enctype="multipart/form-data">
+            <form method="POST" autocomplete="off"> <!--enctype="multipart/form-data"-->
                 {% csrf_token %}
 
                 <!-- <input class="name" type="text" placeholder="Name"> -->
@@ -32,7 +32,7 @@
                 <!-- publish hidden field -->
                 {{ form.user.as_hidden }}
 
-                {% render_field form.cover class='cover' %}<br/>
+                <!-- {% render_field form.cover class='cover' %}<br/> -->
 
                 <!-- error -->
                 {% if flag == False %}

@@ -21,16 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# this must change
 SECRET_KEY = 'js)mw)%b_6shk!yxgc+a3*6d_u3tv-so2mm3^p&w@dgp)@p0oh'
 
-# SECRET_KEY = os.environ.get(
-#     'DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
 # SECURITY WARNING: don't run with debug turned on in production!
-# this must change
 DEBUG = False
-# DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-# this must change
+
 ALLOWED_HOSTS = ['khosravi-library-management.herokuapp.com/', '127.0.0.1', ]
 
 
@@ -135,8 +130,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -146,8 +141,8 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Upload image
-MEDIA_URL = '/images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img/cover')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img/cover')
+# MEDIA_URL = '/images/'
 
 
 # SMTP Configuration

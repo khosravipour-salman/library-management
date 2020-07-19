@@ -14,7 +14,7 @@
     <div class="contact-section">
         <div class="inner-width">
             <h1>Add book</h1>
-            <form method="POST" autocomplete="off" enctype="multipart/form-data">
+            <form method="POST" autocomplete="off" > <!-- enctype="multipart/form-data" -->
                 {% csrf_token %}
 
                 {% render_field form.name placeholder='Name' class='name' %}
@@ -32,7 +32,7 @@
                 {{ form.user.as_hidden }}
                 <!-- {{ form.user.as_hidden }} -->
 
-                {% render_field form.cover class='cover' %}<br/>
+                <!-- {% render_field form.cover class='cover' %}<br/> -->
                 
                 <a href="{% url 'books' %}" class="back">Back</a>
                 <a href="{% url 'add_author' %}" class="add-author">Add Author</a>

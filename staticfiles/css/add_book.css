@@ -47,7 +47,7 @@
     padding: 10px 6px;
     font-size: 14px;
     margin-bottom: 40px;
-}
+}/* cover class is for book covers that we upload */
 
 .name {
     /* float: left; */
@@ -67,8 +67,7 @@
 .cover{
     width: 100%;
     border-bottom: 1px solid lightgray;
-
-}
+}/* cover class is for book covers that we upload */
 
 .description {
     min-width: 100%;
