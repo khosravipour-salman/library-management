@@ -155,8 +155,10 @@ h5 {
     max-width: 100%;
 }
 
-.row .book-cover{
+.row .book-cover img{
     width: 50%;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .row .comment-btn {
