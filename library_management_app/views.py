@@ -98,7 +98,8 @@ def booklist_page(request):
 
     if q:
         # Show similar results by user search # Using Q for multiple search
-        query_set = items.filter(Q(name__icontains=q) | Q(author__name__icontains=q)).distinct()
+        query_set = items.filter(Q(name__icontains=q) | Q(
+            author__name__icontains=q)).distinct()
 
         if not query_set:
             return redirect('books')
@@ -181,8 +182,8 @@ def add_author(request):
                     flag = False
         if flag:
             form.save()
-            return redirect('add_book')            
-            
+            return redirect('add_book')
+
     else:
         form = AuthorForm()
 
@@ -191,6 +192,7 @@ def add_author(request):
         'flag': flag,
     }
     return render(request, 'add_author.html', context)
+
 
 @login_required(login_url='login')
 def edit_book(request, pk):

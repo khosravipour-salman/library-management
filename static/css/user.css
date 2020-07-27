@@ -122,11 +122,11 @@ nav ul div.items a:hover{
 
 .card .card-footer a{
     text-decoration: none;
-    color: #777;
+    color: #444;
 }
 
 .card .card-footer a:hover{
-    color: #444;
+    color: #777;
 }
 
 @media screen and (max-width: 575px) {

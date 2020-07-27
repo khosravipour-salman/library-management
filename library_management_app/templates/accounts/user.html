@@ -21,7 +21,7 @@
             <div class="items">
 
                 <li>
-                    <a href="{% url 'books' %}">Books</a>
+                    <a href="{% url 'books' %}">Home</a>
                 </li>
 
                 {% if request.user in admins %}
@@ -56,9 +56,8 @@
             <div class="col vr">
 
                 <p>
-                    change
                     <a href="{% url 'reset_password' %}" role="button">
-                        <span class="reset-password">Password</span>
+                        <span class="reset-password">Change Password</span>
                     </a>
                 </p>
 

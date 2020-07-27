@@ -24,7 +24,7 @@
 
 
                 <li>
-                    <a href="{% url 'books' %}">Books</a>
+                    <a href="{% url 'books' %}">Home</a>
                 </li>
 
                 {% if request.user in admins %}
@@ -124,27 +124,18 @@
 
                 <table>
                     <tr>
-                        <!-- <td>
-                            Name: &nbsp
-                        </td> -->
                         <td>
                             {% render_field comment_form.name class='name' placeholder='Name' %}
                         </td>
                     </tr>
 
                     <tr>
-                        <!-- <td>
-                            Email: &nbsp
-                        </td> -->
                         <td>
                             {% render_field comment_form.email class='email' placeholder='Email' %}
                         </td>
                     </tr>
 
                     <tr>
-                        <!-- <td>
-                            Commnet: &nbsp
-                        </td> -->
                         <td>
                             {% render_field comment_form.body placeholder='Comment' class='comment' %}
                         </td>

@@ -23,7 +23,7 @@ class BookModel(models.Model):
 
     author = models.ManyToManyField(AuthorModel, related_name='books')
 
-    # cover = models.ImageField(null=True, blank=True, default='book3.jpg')
+    cover = models.ImageField(null=True, blank=True, default='book.jpg')
 
     description = models.TextField(default='No explanation provided')
 
@@ -60,6 +60,21 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.name} on {self.book}'
+
+
+class History(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    request_method = models.CharField(max_length=10)
+    url = models.CharField(max_length=100)
+    request = models.CharField(max_length=100)
+    viewed = models.DateTimeField(auto_now_add=True)
+    user_agent = models.CharField(max_length=250)
+
+    class Meta:
+        verbose_name_plural = 'Histories'
+
+    def __str__(self):
+        return self.request
 
 
 # from library_management_app.models import BookModel, AuthorModel

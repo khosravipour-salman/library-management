@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.http import HttpResponse
 
+
 # Check if user is logged in or not
 # Authenticated users can not go to login, register again
 def unauthenticated_user(view_func):
@@ -13,7 +14,8 @@ def unauthenticated_user(view_func):
 
     return wrapper
 
-# We've set some permissions based on different user groups 
+
+# We've set some permissions based on different user groups
 def allowed_users(allowed_roles=[]):
     def decorator(view_func):
         def wrapper(request, *args, **kwargs):

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'library_management_app',
     'widget_tweaks',
     'search_admin_autocomplete',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'library_management_app.context_processors.log_user_activity',
             ],
         },
     },

@@ -37,7 +37,7 @@
 
             <form class="navbar-form" role="search" method="GET" autocomplete="off">
                 <li class="search-icon">
-                    <input type="search" placeholder="Search" name="q" id="search">
+                    <input type="search" placeholder="Search" name="q" id="search" {% if query %} value="{{ query }}" {% endif %}">
                     <button class="icon" type="submit">
                         <span class="fa fa-search"></span>
                     </button>

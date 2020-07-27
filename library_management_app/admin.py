@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import BookModel, Comment, AuthorModel
+from .models import BookModel, Comment, AuthorModel, History
 from search_admin_autocomplete.admin import SearchAutoCompleteAdmin
+from import_export.admin import ExportMixin
 
 
 @admin.register(BookModel)
@@ -26,3 +27,12 @@ class CommentAdmin(SearchAutoCompleteAdmin):
 class AuthorModelAdmin(SearchAutoCompleteAdmin):
     list_display = ('name',)
     search_fields = ('name',)
+
+
+@admin.register(History)
+class HistoryAdmin(ExportMixin, SearchAutoCompleteAdmin):
+    list_display = ('user', 'request_method', 'url', 'viewed')
+    search_fields = ('user', 'request_method', 'viewed')
+    list_filter = ('user', 'viewed')
+    readonly_fields = ('user', 'request_method', 'url', 'viewed', 'request', 'user_agent')
+    ordering = ('-viewed',)
