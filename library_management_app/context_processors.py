@@ -23,7 +23,5 @@ def log_user_activity(request):
                           user_agent=data['user_agent'],
                           )
         history.save()
-    else:
-        history = 'this is not empty'
-        
-    return {'history_obj': history, }
+
+    return {}
