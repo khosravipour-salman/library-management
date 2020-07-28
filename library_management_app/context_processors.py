@@ -7,7 +7,6 @@ def log_user_activity(request):
     if request.user.is_authenticated:
 
         data = {
-            'timestamp': timezone.now(),
             'request_method': request.method,
             'user': request.user,
             'url': request.build_absolute_uri(),
@@ -16,12 +15,8 @@ def log_user_activity(request):
         }
 
         # Write data in database
-        history = History(user=data['user'],
-                          request_method=data['request_method'],
-                          url=data['url'],
-                          request=data['request'],
-                          user_agent=data['user_agent'],
-                          )
+        history = History(**data)
         history.save()
+    
 
     return {}
