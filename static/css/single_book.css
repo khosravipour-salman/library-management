@@ -156,8 +156,8 @@ h5 {
 }
 
 .row .book-cover img{
-    width: 5%;
-    /* height: 150px; */
+    width: 100px;
+    height: 100px;
     padding-top: 0px;
     padding-bottom: 0px;
 }
