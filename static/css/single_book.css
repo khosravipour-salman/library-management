@@ -156,8 +156,8 @@ h5 {
 }
 
 .row .book-cover img{
-    width: 10%;
-    height: 150px;
+    width: 5%;
+    /* height: 150px; */
     padding-top: 0px;
     padding-bottom: 0px;
 }
@@ -196,6 +196,9 @@ h5 {
     nav ul div.items {
         flex: 4;
     }
+    .row .book-cover{
+        width: 30%;
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -207,6 +210,9 @@ h5 {
     h5 {
         display: block;
     }
+    .row .book-cover{
+        width: 50%;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -214,6 +220,9 @@ h5 {
         width: 100%;
         text-align: center;
         margin-bottom: 30px;
+    }
+    .row .book-cover{
+        width: 55%;
     }
 }
 
